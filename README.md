@@ -1,13 +1,19 @@
+## 🚀 Version 2.1 Highlights
+- Weighted risk scoring
+- URL intelligence
+- Explainable, human-readable output
+- Improved UI clarity for adults
+
+
+
 # 🛡️ Adult Lock
 
 Explainable fraud awareness system for adults.
 
 ## 🚩 Problem
-Online scams succeed due to urgency and emotional manipulation.
 Due to rise in onnline fraud for the elderly they are loosing huge amount of money, privacy and what not. We cannot monitor their phone all the time to be sure they accidently dont click on a malecious link which came via a message or an email. 
 
 ## 💡 Solution
-Adult Lock analyzes behavioral patterns and explains risks.
 Adult lock is a solution which without reading your message or emails, without asking for access permisions ask the users to paste the message and give them an indication of wheather the message is fraud or real.
 
 ## ⚙️ How It Works
@@ -65,4 +71,3 @@ SMS sharing integration
 Lightweight backend
 
 Privacy-first design
-

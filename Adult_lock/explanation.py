@@ -1,10 +1,19 @@
-def risk_level(score):
+# def risk_level(score):
+#     if score <= 30:
+#         return "🟢 Safe"
+#     elif score <= 60:
+#         return "🟡 Caution"
+#     else:
+#         return "🔴 High Risk"
+
+def risk_meter(score):
     if score <= 30:
-        return "🟢 Safe"
+        return "🟢 LOW RISK"
     elif score <= 60:
-        return "🟡 Caution"
+        return "🟡 MEDIUM RISK"
     else:
-        return "🔴 High Risk"
+        return "🔴 HIGH RISK"
+
 
 
 def recommendation(level):
