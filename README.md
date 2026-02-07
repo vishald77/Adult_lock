@@ -4,12 +4,13 @@
 - Explainable, human-readable output
 - Improved UI clarity for adults
 
-![Architecture](Adult_lock/assets/architecture_v2.png)
+![Architecture](assets/architecture_v2.png)
 
 
 # 🛡️ Adult Lock
 
-Explainable fraud awareness system for adults.
+Adult Lock v2.1 is an explainable fraud awareness tool that helps adults pause and think before interacting with suspicious messages or links.
+
 
 ## 🚩 Problem
 Due to rise in onnline fraud for the elderly they are loosing huge amount of money, privacy and what not. We cannot monitor their phone all the time to be sure they accidently dont click on a malecious link which came via a message or an email. 
@@ -24,6 +25,10 @@ Adult lock is a solution which without reading your message or emails, without a
 
 ## 🧠 Why Explainable AI?
 Trust > accuracy in early-stage safety systems.
+
+
+![Demo](Adult_lock/assets/demo_v2.png)
+
 
 ## 🚀 Future Scope
 - ML integration
