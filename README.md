@@ -4,7 +4,7 @@
 - Explainable, human-readable output
 - Improved UI clarity for adults
 
-![Architecture](assets/architecture_v2.png)
+![Architecture](Adult_lock/assets/architecture_v2.png)
 
 
 # 🛡️ Adult Lock
