@@ -7,7 +7,9 @@
 #         return "🔴 High Risk"
 
 def risk_meter(score):
-    if score <= 30:
+    if score == -1:
+        return "⚪ UNKNOWN"
+    elif score <= 30:
         return "🟢 LOW RISK"
     elif score <= 60:
         return "🟡 MEDIUM RISK"

@@ -8,7 +8,11 @@ def analyze_urls(text):
     risk = 0
     reasons = []
 
-    urls = re.findall(r'(https?://\S+)', text)
+    try:
+        urls = re.findall(r'(https?://\S+)', text)
+
+    except Exception as e:
+        print(f"Invalid or Unknown content")
 
     for url in urls:
         parsed = urlparse(url)
