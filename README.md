@@ -1,3 +1,8 @@
+v2.3 – Explainability
+- Transparent risk reasons
+- Urgency, authority, fear & reward signals
+- Safe handling of unknown/short inputs
+
 ## 🚀 Version 2.1 Highlights
 - Weighted risk scoring
 - URL intelligence
