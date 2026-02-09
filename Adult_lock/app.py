@@ -24,15 +24,28 @@ if st.button("Analyze Risk"):
 
         result = calculate_risk(message)
 
+        st.markdown(f"### {result['risk']}")
+
+        if result["score"] is not None:
+            score = result["score"]
+
+            if isinstance(score, (int, float)) and score >= 0:
+                normalized = min(max(score / 100, 0.0), 1.0)
+                st.progress(normalized)
+
+        st.subheader("Why?")
+        for r in result["reasons"]:
+            st.write("•", r)
+
         # Accept tuple-like returns of length >=2, ignore extras if present
         if isinstance(result, (list, tuple)):
             if len(result) >= 2:
                 score, reasons, *extra = result
             else:
-                st.error("Message too short to analyze")
+                # st.error("Message too short to analyze")
                 st.stop()
         else:
-            st.error("Message too short to analyze")
+            # st.error("Message too short to analyze")
             st.stop()
 
         # basic validation / normalization
