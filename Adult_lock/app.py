@@ -2,6 +2,7 @@ import streamlit as st
 # from risk_engine import calculate_risk
 # from explanation import risk_meter, recommendation
 # from explanation import risk_meter, recommendation, risk_meter
+from highlighter import highlight_text
 
 from risk_engine import calculate_risk
 from explanation import risk_meter, recommendation
@@ -21,55 +22,47 @@ if st.button("Analyze Risk"):
         st.warning("Please enter a message.")
     else:
         # score, reasons = calculate_risk(message)
-
+      
         result = calculate_risk(message)
 
+        # --- Highlight risky content ---
+        if isinstance(result.get("signals"), dict) and result["signals"]:
+            highlighted = highlight_text(message, result["signals"])
+            st.markdown("### Highlighted Risky Content")
+            st.markdown(highlighted, unsafe_allow_html=True)
+        # --- Risk label ---
         st.markdown(f"### {result['risk']}")
 
-        if result["score"] is not None:
-            score = result["score"]
+        # --- Progress bar ---
+        score = result.get("score", 0)
+        if isinstance(score, (int, float)) and score >= 0:
+            st.progress(min(max(score / 100, 0.0), 1.0))
 
-            if isinstance(score, (int, float)) and score >= 0:
-                normalized = min(max(score / 100, 0.0), 1.0)
-                st.progress(normalized)
-
+        # --- Reasons ---
         st.subheader("Why?")
-        for r in result["reasons"]:
-            st.write("•", r)
 
-        # Accept tuple-like returns of length >=2, ignore extras if present
-        if isinstance(result, (list, tuple)):
-            if len(result) >= 2:
-                score, reasons, *extra = result
+        # fetch explanations from risk engine
+        explanations = result.get("explanations", [])
+
+        # guard: make sure it's a list of strings
+        if isinstance(explanations, str):
+            explanations = [explanations]
+
+        # flatten nested lists if explain() ever returns a list inside a list
+        flat_explanations = []
+        for item in explanations:
+            if isinstance(item, list):
+                flat_explanations.extend(item)
             else:
-                # st.error("Message too short to analyze")
-                st.stop()
+                flat_explanations.append(str(item))  # convert anything else to string
+
+        # render
+        if not flat_explanations:
+            st.write("• No strong risk signals detected")
         else:
-            # st.error("Message too short to analyze")
-            st.stop()
+            for e in flat_explanations:
+                st.write("•", e)
 
-        # basic validation / normalization
-        try:
-            score = float(score)
-        except Exception:
-            st.error("Risk score returned by calculate_risk is not numeric.")
-            st.stop()
-
-        if not isinstance(reasons, (list, tuple)):
-            reasons = [str(reasons)]
-
-        st.markdown("## 🔍 Risk Assessment")
-        st.markdown(f"### {risk_meter(score)}")
-        st.write(f"**Risk Score:** {score}/100")
-
-        with st.expander("Why was this flagged?"):
-            if reasons:
-                for r in reasons:
-                    st.write(f"- {r}")
-            else:
-                st.write("No suspicious patterns detected.")
-
-
-        # st.markdown("### Recommendation")
+        # --- Recommendation ---
         st.markdown("### ✅ Recommended Action")
-        st.info(recommendation(risk_meter(score)))
+        st.info(recommendation(result["risk"]))
