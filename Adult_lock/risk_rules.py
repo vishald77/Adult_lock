@@ -1,26 +1,29 @@
 import re
-import validators
-from urllib.parse import urlparse
 
+# Pattern lists
 URGENCY_PATTERNS = [
-    "act now", "immediately", "urgent", "within 24 hours",
-    "limited time", "asap"
+    "urgent", "act immediately", "act now", "immediately", "asap", "limited time"
 ]
 
 AUTHORITY_PATTERNS = [
-    "bank", "police", "government", "tax", "hr",
-    "manager", "security team"
+    "admin", "bank", "support", "security", "official", "manager"
 ]
 
 REWARD_PATTERNS = [
-    "won", "winner", "prize", "refund", "cashback", "bonus"
+    "win", "bonus", "reward", "prize", "gift", "congratulations"
 ]
 
 FEAR_PATTERNS = [
-    "account blocked", "suspended", "legal action",
-    "verify immediately", "unauthorized activity"
+    "risk", "danger", "threat", "locked", "suspended", "terminated"
 ]
 
-
 def contains_pattern(text, patterns):
-    return any(pat in text.lower() for pat in patterns)
+    """
+    Returns True if any pattern matches the text.
+    Case-insensitive substring match.
+    """
+    text = text.lower()
+    for p in patterns:
+        if p.lower() in text:
+            return True
+    return False
