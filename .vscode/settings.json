@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Adult_lock/risk_engine"
+    ]
+}

@@ -3,8 +3,9 @@ import streamlit as st
 # from explanation import risk_meter, recommendation
 # from explanation import risk_meter, recommendation, risk_meter
 from highlighter import highlight_text
+from risk_engine.ensemble import analyze_message
 
-from risk_engine import calculate_risk
+from risk_engine.risk_engine import calculate_risk
 from explanation import risk_meter, recommendation
 
 st.set_page_config(page_title="Adult Lock v2", layout="centered")
@@ -23,7 +24,8 @@ if st.button("Analyze Risk"):
     else:
         # score, reasons = calculate_risk(message)
       
-        result = calculate_risk(message)
+        # result = calculate_risk(message)
+        result = analyze_message(message)
 
         # --- Highlight risky content ---
         if isinstance(result.get("signals"), dict) and result["signals"]:

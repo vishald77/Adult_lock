@@ -1,5 +1,5 @@
 from risk_rules import contains_pattern, URGENCY_PATTERNS, AUTHORITY_PATTERNS, REWARD_PATTERNS, FEAR_PATTERNS
-from explainability import explain
+from risk_engine.explainability import build_explanations
 
 def analyze_urls(message):
     """
@@ -58,7 +58,7 @@ def calculate_risk(message):
         result["explanations"].append(url_explanations)
 
     # Explain layer
-    explain_explanations, signals = explain(text)
+    explain_explanations, signals = build_explanations(text)
     if not isinstance(signals, dict):
         signals = {}
     result["signals"] = signals
@@ -66,8 +66,8 @@ def calculate_risk(message):
     if explain_explanations:
         if isinstance(explain_explanations, list):
             result["explanations"].extend(explain_explanations)
-        # elif isinstance(explain_explanations, str):
-        #     result["explanations"].append(explain_explanations)
+        elif isinstance(explain_explanations, str):
+            result["explanations"].append(explain_explanations)
 
     # Clamp score
     score = max(0, min(score, 100))
