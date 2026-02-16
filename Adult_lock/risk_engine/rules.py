@@ -1,9 +1,15 @@
 import re
 
 SUSPICIOUS_KEYWORDS = [
-    "urgent", "verify", "password", "bank", "login",
-    "account", "click", "confirm", "security"
+    "urgent","verify","bank","login","account","password",
+    "reward","bonus","prize","gift","claim",
+    "crypto","wallet","bitcoin","transfer"
 ]
+
+COURIER_PATTERNS = ["customs", "package on hold", "unpaid fees", "return to sender", "confirm delivery"]
+
+crypto_words = ["crypto","wallet","bitcoin","bonus","reward"]
+
 
 def rule_score(text: str):
     score = 0
@@ -11,6 +17,15 @@ def rule_score(text: str):
     found_keywords=[]
 
     text_lower = text.lower()
+
+    if any(word in text.lower() for word in crypto_words):
+        triggers.append("Cryptocurrency reward/bonus request")
+        score += 30
+
+    for pattern in COURIER_PATTERNS:
+        if pattern.lower() in text.lower():
+            triggers.append(f"Courier / customs scam detected: {pattern}")
+            score += 25
 
     for word in SUSPICIOUS_KEYWORDS:
         if word in text_lower:
