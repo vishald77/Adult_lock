@@ -8,6 +8,9 @@ from risk_engine.ensemble import analyze_message
 from risk_engine.risk_engine import calculate_risk
 from explanation import risk_meter, recommendation
 
+
+DEBUG = True
+
 st.set_page_config(page_title="Adult Lock v2", layout="centered")
 
 st.title("🛡️ Adult Lock v2")
@@ -68,3 +71,10 @@ if st.button("Analyze Risk"):
         # --- Recommendation ---
         st.markdown("### ✅ Recommended Action")
         st.info(recommendation(result["risk"]))
+
+        if DEBUG and "debug" in result:
+            st.divider()
+            st.write("🔍 Debug Info")
+            st.write("Rule Score:", result["debug"]["rule_score"])
+            st.write("Model Score:", result["debug"]["model_score"])
+            st.write("Final Score:", result["score"])

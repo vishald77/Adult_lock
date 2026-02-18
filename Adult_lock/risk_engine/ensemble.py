@@ -10,10 +10,14 @@ def analyze_message(text: str):
     final_score = int((rule_score_value * 0.7) + (model_score * 0.3))
     
     result = {
-        "score": final_score,
-        "risk": None,
-        "explanations": []
+    "score": final_score,
+    "risk": None,
+    "explanations": [],
+    "debug": {
+        "rule_score": rule_score_value,
+        "model_score": model_score
     }
+}
     
     if final_score >= 75:
         result["risk"] = "BLOCKED"
@@ -28,7 +32,4 @@ def analyze_message(text: str):
         model_score,
         final_score
     )
-    print("RULE SCORE:", rule_score_value)
-    print("MODEL SCORE:", model_score)
-    print("FINAL SCORE:", final_score)
     return result
