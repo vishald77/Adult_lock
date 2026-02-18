@@ -1,4 +1,33 @@
-v2.3 – Explainability
+# 🛡️ Adult Lock
+
+Adult Lock is an explainable fraud awareness tool that detects phishing and scam messages using hybrid rule-based and machine learning analysis.
+
+## Features
+
+- Detects phishing & scam messages
+- Hybrid rule-based + ML scoring
+- Explainable risk reasoning
+- Suspicious link detection
+- Urgency & authority impersonation detection
+- Clean Streamlit UI
+
+## How it Works
+
+1. Rules engine detects scam patterns
+2. ML model identifies phishing language patterns
+3. Ensemble scoring calculates final risk
+4. Explainability layer shows why the message is risky
+
+## Run Locally
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+#v2.3 – Explainability
 - Transparent risk reasons
 - Urgency, authority, fear & reward signals
 - Safe handling of unknown/short inputs
