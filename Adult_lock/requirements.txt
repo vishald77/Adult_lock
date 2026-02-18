@@ -1,3 +1,13 @@
+# Core runtime
 streamlit
 validators
-regex
+
+# ML / training (required if you train or load the model locally)
+pandas
+scikit-learn
+joblib
+
+# NOTE: the stdlib 're' is used in code; the third-party 'regex' package was
+# previously present but not referenced anywhere in the repository. Add it
+# back only if you intentionally rely on the regex module's extra features.
+# regex
