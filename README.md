@@ -24,7 +24,8 @@ Adult Lock is an explainable fraud awareness tool that detects phishing and scam
 pip install -r requirements.txt
 streamlit run app.py
 
-
+```
+#########################################################################################
 -----------------------------------------------------------------------------------------------------------------
 
 #v2.3 – Explainability
